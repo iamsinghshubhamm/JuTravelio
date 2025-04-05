@@ -42,9 +42,7 @@
 
       <nav class="navbar navbar-expand-lg bg-body-tertiary custom">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#"
-            ><i class="bi bi-trello">Travelio</i></a
-          >
+          <a class="navbar-brand" href="#"><i class="bi bi-trello">Travelio</i></a>
           <button
             class="navbar-toggler"
             type="button"
@@ -99,24 +97,35 @@
               </li>
             </ul>
             <span class="navbar-text">
-              <button
-                class="btn btn-light"
-                data-bs-target="#registermodal"
-                data-bs-toggle="modal"
-              >
-                Register
-              </button>
-              <button
-                class="btn btn-light"
-                data-bs-target="#loginmodal"
-                data-bs-toggle="modal"
-              >
-                <i class="bi bi-lock"></i>Login
-              </button>
+              <!-- Register and Login buttons - show when not logged in -->
+              <span id="authButtons">
+                <button
+                  class="btn btn-light"
+                  data-bs-target="#registermodal"
+                  data-bs-toggle="modal"
+                >
+                  Register
+                </button>
+                <button
+                  class="btn btn-light"
+                  data-bs-target="#loginmodal"
+                  data-bs-toggle="modal"
+                >
+                  <i class="bi bi-lock"></i>Login
+                </button>
+              </span>
+              
+              <!-- Logout button - show when logged in -->
+              <span id="logoutButton" style="display: none;">
+                <button class="btn btn-light" id="logoutBtn">
+                  <i class="bi bi-box-arrow-right"></i> Logout
+                </button>
+              </span>
             </span>
           </div>
         </div>
       </nav>
+      
 
       <!-- Jumbotron -->
 
@@ -832,71 +841,35 @@
       </div>
 
       <!-- Register Modal -->
-      <div
-        class="modal"
-        id="registermodal"
-        tabindex="-1"
-        aria-labelledby="registerModalLabel"
-        aria-hidden="true"
-      >
+      <div class="modal" id="registermodal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h3>Register Form</h3>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form>
-                <input
-                  type="text"
-                  placeholder="Full Name"
-                  class="form-control mb-2"
-                />
+              <form id="registerForm">
+                <input type="text" id="registerName" placeholder="Full Name" class="form-control mb-2" required>
                 <p></p>
-                <input
-                  type="email"
-                  placeholder="Email ID"
-                  class="form-control mb-2"
-                  id="email"
-                />
-                <p id="emailtext"></p>
-                <input
-                  type="password"
-                  placeholder="Password"
-                  class="form-control mb-2"
-                  id="password"
-                />
-                <p id="passtext"></p>
-                <input
-                  type="tel"
-                  placeholder="Mobile"
-                  class="form-control mb-2"
-                  id="mobile"
-                />
-                <p id="mobiletext"></p>
+                <input type="email" id="registerEmail" placeholder="Email ID" class="form-control mb-2" required>
+                <p id="registerEmailtext"></p>
+                <input type="password" id="registerPassword" placeholder="Password" class="form-control mb-2" required>
+                <p id="registerPasstext"></p>
+                <input type="tel" id="registerMobile" placeholder="Mobile" class="form-control mb-2" required>
+                <p id="registerMobiletext"></p>
                 <div class="form-group">
-                  
-                  <input type="date" class="form-control" id="dob">
+                  <input type="date" class="form-control" id="registerDob" required>
                 </div>
                 <p></p>
-                <div class="form-group ">
-    
-                  <select class="form-control" id="gender" >
+                <div class="form-group">
+                  <select class="form-control" id="registerGender" required>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                     <option value="other">Other</option>
-                  </select>   
-              
+                  </select>
                 </div>
-
-                <button type="button" class="btn btn-success mb-2">
-                  Register
-                </button>
+                <button type="submit" class="btn btn-success mb-2">Register</button>
                 <p>
                   Already have an account?
                   <a href="#" onclick="switchModal('login')">Log In</a>
@@ -904,50 +877,25 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-danger btn-sm"
-                data-bs-dismiss="modal"
-              >
-                Cancel
-              </button>
+              <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Cancel</button>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Login Modal -->
-      <div
-        class="modal"
-        id="loginmodal"
-        tabindex="-1"
-        aria-labelledby="loginModalLabel"
-        aria-hidden="true"
-      >
+      <div class="modal" id="loginmodal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
               <h3>Login Form</h3>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form>
-                <input
-                  type="email"
-                  placeholder="Email ID"
-                  class="form-control mb-2"
-                />
-                <input
-                  type="password"
-                  placeholder="Password"
-                  class="form-control mb-2"
-                />
-                <button type="button" class="btn btn-success">Login</button>
+              <form id="loginForm">
+                <input type="email" id="loginEmail" placeholder="Email ID" class="form-control mb-2" required>
+                <input type="password" id="loginPassword" placeholder="Password" class="form-control mb-2" required>
+                <button type="submit" class="btn btn-success">Login</button>
                 <p>
                   Don't have an account?
                   <a href="#" onclick="switchModal('register')">Sign Up</a>
@@ -955,17 +903,12 @@
               </form>
             </div>
             <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-danger btn-sm"
-                data-bs-dismiss="modal"
-              >
-                Cancel
-              </button>
+              <button type="button" class="btn btn-danger btn-sm" data-bs-dismiss="modal">Cancel</button>
             </div>
           </div>
         </div>
       </div>
+      
     </div>
     <script
       src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
